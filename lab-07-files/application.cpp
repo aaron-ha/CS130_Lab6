@@ -65,10 +65,12 @@ void application::init_event()
 
     t.reset();
 }
+
 void draw_torus(float inner_radius,float outer_radius)
 {
     draw_solid ? glutSolidTorus(inner_radius, outer_radius, 20,20) : glutWireTorus(inner_radius,outer_radius, 20,20);
 }
+
 void draw_sphere(float radius)
 {
     draw_solid ? glutSolidSphere(radius, 20, 20) : glutWireSphere(radius, 20, 20);
@@ -96,34 +98,39 @@ void application::draw_scene(float time_elapsed)
 	glPushMatrix();
 
 	// Yellow Sphere
+		glPushMatrix();
 		float angular_speed = -150;
 		glRotatef(time_elapsed*angular_speed,0,1,0); 
 		glTranslatef(2, 0, 0);
 		glColor3f(1, 1, 0);
 		draw_sphere(0.5);
+		glPopMatrix();
 
 	// Cyan Dodecahedron
-		glPopMatrix();
 		glRotatef(time_elapsed*20,0,1,0);
    		glTranslatef(8,0,0);
-   		glScalef(0.5, 0.5, 0.5);
+   		glPushMatrix();
+		glScalef(0.5, 0.5, 0.5);
     	glColor3f(0, 1, 1);
     	draw_dodecadron();
- 		glPushMatrix();   
+		glPopMatrix();
   
   // Green Sphere
+  		glPushMatrix();
 		glRotatef(time_elapsed*300,1,0,0);
     	glTranslatef(0, 2, 0);
     	glColor3f(0, 1, 0);
     	draw_sphere(0.2);
-        
+		glPopMatrix();
+
     // Purple Box
 		glRotatef(time_elapsed*100,0,1,0);
 		glTranslatef(4, 0, 0);
+		glPushMatrix();
 		glScalef(0.5, 2, 0.5);
 		glColor3f(1, 0, 1);
 		draw_unit_cube();
-    	glPushMatrix();
+		glPopMatrix();
 
 	// Red Dodecahedron
 		glRotatef(time_elapsed*350,0,1,0);
